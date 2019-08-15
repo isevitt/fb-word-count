@@ -23,4 +23,4 @@ def get_list_words(html):
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return 'Hello!'
