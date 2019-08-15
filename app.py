@@ -3,11 +3,13 @@ import requests
 import re
 import urllib.request
 from inscriptis import get_text
-from flask import Flask
+from flask import Flask, request, url_for, render_template
+from collections import Counter
+
+import sys
 app = Flask(__name__)
 
-def scrape():
-    url = "https://www.bbc.co.uk"
+def scrape(url):
     html = urllib.request.urlopen(url).read().decode('utf-8')
     return html
 
@@ -23,9 +25,21 @@ def get_list_words(html):
 
 @app.route('/')
 def main_page():
-    html_content = scrape()
+    if request.method == "POST":
+        return url_for('calculate/', url = "efsefsefsef" )
+
+    return render_template("index.html")
+
+
+
+
+@app.route('/calculate/<url>')
+def calculate(url):
+    html_content = scrape(url)
     list_words = get_list_words(html_content)
-    return list_words
+
+    counts = Counter(list_words)
+    return counts
 
 if __name__ == '__main__':
     app.run(debug=True)
