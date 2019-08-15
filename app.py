@@ -22,5 +22,10 @@ def get_list_words(html):
     return list_of_words
 
 @app.route('/')
-def hello_world():
-    return 'Hello!'
+def main_page():
+    html_content = scrape()
+    list_words = get_list_words(html_content)
+    return list_words
+
+if __name__ == '__main__':
+    app.run(debug=True)
