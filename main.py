@@ -3,6 +3,8 @@ import requests
 import re
 import urllib.request
 from inscriptis import get_text
+from flask import Flask
+app = Flask(__name__)
 
 def scrape():
     url = "https://www.bbc.co.uk"
@@ -18,3 +20,7 @@ def get_list_words(html):
     text = re.sub(' +', ' ', text)
     list_of_words = text.split(" ")
     return list_of_words
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
